@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    <script src="JS/jquery-3.7.1.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -85,20 +87,29 @@
 
     <section class="section-cadastro">
         <div class="container-cadastro">
-            <form action="get">
-                <input type="text" id="name" placeholder="Digite seu nome">
-                <br>
-                <input type="text" id="sobrenome" placeholder="Digite seu sobrenome">
-                <br>
-                <input type="text" id="email" placeholder="Digite seu e-mail">
+            <form action="get" class="form">
+                <input type="text" id="name" placeholder="Digite seu nome: "><br>
+                
+                <input type="text" id="sobrenome" placeholder="Digite seu sobrenome: "><br>
+                
+                <input type="text" id="email" placeholder="Digite seu e-mail: "><br>
 
-                <div>
-                    <input type="text" id="cel" placeholder="Digite seu celular">
+                <div class="cont-cadastro">
+                    <input type="text" id="cel" placeholder="Digite seu celular: ">
 
-                    <input type="cep" id="cep" placeholder="Digite seu CEP">
+                    <input type="cep" id="cep" placeholder="Digite seu CEP: ">
 
                 </div>
 
+                <input type="text" name="rua" id="rua" placeholder="Digite sua rua: "><br>
+    
+                <input type="text" name="bairro" id="bairro" placeholder="Digite seu bairro: "><br>
+        
+                <input type="text" name="cidade" id="cidade" placeholder="digite sua cidade: "><br>
+        
+                <input type="text" name="estado" id="uf" placeholder="Digite seu estado: "><br>
+        
+               <button class="btn-cadastrar">Cadastrar</button>
                 
             </form>
 
@@ -110,8 +121,8 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-    <script src="JS/api.js"></script>
     <script src="JS/pesquisa.js"></script>
+    <script src="JS/cep.js"></script>
 
 </body>
 </html>
