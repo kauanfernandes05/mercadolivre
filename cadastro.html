@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se</title>
+
+    <link rel="stylesheet" href="CSS/cadastro.css">
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="CSS/cabecalho.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+
+        <div class="container-input">
+
+          <div>
+            <img class="logo" src="IMG/mercado-livre-87.png" alt="logo">
+          </div>
+
+        
+          <div class="pesquisa"> 
+            <div class="conta-pesquisa">
+
+              
+              <ion-icon name="search-outline" id="icon-p"></ion-icon>
+               
+            
+              <input type="text" id="input-pesquisa" placeholder="buscar, produtos,marcas,e muito mais..." autocomplete="off">
+            </div>
+
+            <div id="results"></div>
+          </div> 
+
+        </div>
+
+    </header>
+
+    <div class="cont-categorias">
+
+      <div class="cont-cep">
+        <ion-icon name="location-outline" id="icon-cep"></ion-icon>
+        <p>informe seu <br><strong>CEP</strong></p>
+      </div>
+
+      <div class="cont-cards">
+        <div class="cont-butons" id="card-dropdown">
+          <p>Categorias</p>
+          <button class="btn-v">v</button>
+          <div class="dropdown">
+            <a>Roupas e acessórios</a>
+            <a>Celulares e Telefones</a>
+            <a>Computação</a>
+            <a>Consoles e Videogames</a>
+            <a>Comidas e Bebidas</a>
+            <a>Eletrodomésticos</a>
+            <a>Esportes e Fitness</a>
+          </div>
+        </div>
+  
+        <div class="cont-butons">
+          <p>Ofertas</p>  
+        </div>
+        
+        <div class="cont-butons">
+          <p>Cadastre-se</p>
+        </div>
+  
+        <div class="cont-butons">
+          <p>Entrar</p>
+        </div>
+      </div>
+
+      <div class="cont-cart">
+        <ion-icon name="cart-outline" id="icon-cart"></ion-icon>
+      </div>
+    
+    </div>
+
+
+    <section class="section-cadastro">
+        <div class="container-cadastro">
+            <form action="get">
+                <input type="text" id="name" placeholder="Digite seu nome">
+                <br>
+                <input type="text" id="sobrenome" placeholder="Digite seu sobrenome">
+                <br>
+                <input type="text" id="email" placeholder="Digite seu e-mail">
+
+                <div>
+                    <input type="text" id="cel" placeholder="Digite seu celular">
+
+                    <input type="cep" id="cep" placeholder="Digite seu CEP">
+
+                </div>
+
+                
+            </form>
+
+        </div>
+    </section>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/pesquisa.js"></script>
+
+</body>
+</html>
