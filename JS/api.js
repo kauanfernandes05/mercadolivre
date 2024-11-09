@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     produtos();
+    localStorage.clear();
 })
 
 async function produtos() {
@@ -13,7 +14,8 @@ async function produtos() {
 
         const ofertas = document.createElement('div');
         ofertas.classList.add('ofertas');
-        ofertas.setAttribute('id', produto.id);
+
+        ofertas.onclick = () => comprarProdutos(produto.id);
 
         const image = document.createElement('img');
         image.classList.add('img-oferta');
@@ -48,6 +50,14 @@ async function produtos() {
         ofertasContainer.appendChild(ofertas);
     })
     
+}
+
+async function comprarProdutos(id) {
+    const request = await fetch(`https://api.mercadolibre.com/items/${id}`)
+    const item = await request.json();
+    
+    localStorage.setItem('produtoSelecionado', JSON.stringify(item));
+    window.location.href = '../produtos.html'
 }
 
 async function buscarItems() {
