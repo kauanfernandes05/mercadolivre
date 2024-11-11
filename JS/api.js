@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     produtos();
-    localStorage.clear();
+    localStorage.removeItem('produtoSelecionado');
 })
 
 async function produtos() {

@@ -207,6 +207,7 @@ header{
 
     transform: translateY(-20px);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
 }
 
@@ -217,14 +218,131 @@ header{
 #card-dropdown:hover .dropdown, .dropdown:hover {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
 }
 
 #card-dropdown:hover .btn-v {
     transform: rotate(180deg);
 }
 
+#icon-cart {
+    cursor: pointer;
+}
+
 .cont-cart{
     margin-left: 200px;
     margin-bottom: 10px;
+
     font-size: 35px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-quantia {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    
+    background-color: rgb(46, 161, 255);
+    color: white;
+
+    font-size: 10px;
+    font-weight: 600;
+    
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-items {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: -1400%;
+    height: 400px;
+
+    background-color: white;
+    z-index: 3;
+    overflow-y: scroll;
+}
+
+.cart-items.active {
+    display: grid;
+}
+
+.cart-produto {
+    display: flex;
+    position: relative;
+    
+    gap: 20px;
+    width: 100%;
+    height: 200px;
+}
+
+.cart-produto img {
+    width: 50%;
+}
+
+.cart-textos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cart-textos h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cart-textos h1 {
+    font-size: 23px;
+
+    padding: 20px 0;
+}
+
+.cart-textos p {
+    font-size: 16px;
+}
+
+.cart-textos h2,
+.cart-textos h1,
+.cart-textos p{
+    margin: 0;
+}
+
+.cart-quantidade {
+    display: flex;
+}
+
+#excluir {
+    position: absolute;
+    display: grid;
+
+    cursor: pointer;
+    
+    top: 20px;
+    right: 10px;
+    gap: 5px;
+}
+
+#excluir div {
+    width: 20px;
+    height: 2px;
+    background-color: black;
+}
+
+#excluir div:nth-of-type(1) {
+    transform: translateY(3px) rotate(-135deg);
+}
+
+#excluir div:nth-of-type(2) {
+    transform: translateY(-4px) rotate(-45deg);
 }

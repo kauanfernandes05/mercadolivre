@@ -13,10 +13,6 @@
     padding-top: 50px;
 }
 
-.img-oferta {
-    width: 100%;
-}
-
 .h1-ofertas{
     text-align: center;
     font-size: 40px;
@@ -26,9 +22,12 @@
     border: 1px solid white;
     width: 400px;
     border-radius: 10px;
+    padding: 20px 0;
+
     box-shadow:0 4px 10px rgba(0, 0, 0, 0.5);
     transition: 0.3s;
-    padding: 20px 0;
+
+    cursor: pointer;
 }
 
 .text-oferta{

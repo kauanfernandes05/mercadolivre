@@ -1,4 +1,3 @@
-const accessToken = 'APP_USR-4536348135170024-110717-f65dbaf3417ecc49e24e5b94fff3bd91-2082297167';
 const resultados = document.getElementById('results');
 const inputPesquisa = document.getElementById('input-pesquisa');
 
@@ -12,7 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     inputPesquisa.addEventListener('blur', () => {
-        resultados.style.display = 'none';
+        setTimeout(() => {
+            if (!resultados.contains(document.activeElement)) {
+                resultados.style.display = 'none';
+            }
+        }, 1000)
     })
 })
 
@@ -33,6 +36,12 @@ function mostrarResultados(items) {
     items.forEach(item => {
         const divContainer = document.createElement('div');
         divContainer.classList.add('results-produto');
+
+        divContainer.onclick = (evento) => {
+            evento.stopPropagation();
+            
+            comprarProdutos(item.id);
+        }
 
         const image = document.createElement('img');
         image.setAttribute('src', item.thumbnail);
@@ -66,3 +75,16 @@ inputPesquisa.addEventListener('input', () => {
     const termoDePesquisa = inputPesquisa.value.trim();
     procurarPorNome(termoDePesquisa);
 })
+
+async function comprarProdutos(id) {
+    try {
+        const request = await fetch(`https://api.mercadolibre.com/items/${id}`)
+        const item = await request.json();
+        
+        localStorage.setItem('produtoSelecionado', JSON.stringify(item));
+        window.location.href = '../produtos.html'
+        
+    } catch (error) {
+        alert('Erro ao buscar produto');
+    }
+}
