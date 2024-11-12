@@ -1,6 +1,14 @@
+import { atualizarCarrinho } from './produto.js'
+
 document.addEventListener('DOMContentLoaded', () => {
     produtos();
     localStorage.removeItem('produtoSelecionado');
+
+    let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || '[]');
+    if (!Array.isArray(carrinhoProdutos)) {
+        carrinhoProdutos = [];
+    }
+    atualizarCarrinho(carrinhoProdutos);
 })
 
 async function produtos() {

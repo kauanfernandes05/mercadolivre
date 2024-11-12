@@ -1,16 +1,20 @@
+import { verificaQuantidade } from "./carrinho.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const produtoSelecionado = JSON.parse(localStorage.getItem('produtoSelecionado'));
     if (produtoSelecionado) {
         mostrarProduto(produtoSelecionado);
     }
 
-    JSON.parse(localStorage.getItem('carrinhoProduto'));
+    let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || '[]');
+    if (!Array.isArray(carrinhoProdutos)) {
+        carrinhoProdutos = [];
+    }
+    atualizarCarrinho(carrinhoProdutos);
 });
 
 function mostrarProduto(item) {
     const produtoContainer = document.querySelector('.produto');
-    console.log(item);
-    
     
     const titulo = document.createElement('h2');
     titulo.textContent = item.title;
@@ -140,26 +144,62 @@ function adicionarCarrinho(item, quantidade) {
     if(quantidade.textContent == 'quantidade') {
         alert('Escolha a quantidade');
     } else {
-        const contCart = document.querySelector('.cart-items');
-        let numero = Number(quantidade.textContent.substr(0, 1));
+        let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || []);
+
+        if (!Array.isArray(carrinhoProdutos)) {
+            carrinhoProdutos = [];
+        }
         
-        const cartQuantia = document.querySelector('.cart-quantia');
-        cartQuantia.textContent = Number(cartQuantia.textContent) + numero;
+        let numero = Number(quantidade.textContent.substr(0, 1));
+
+        const produtoCarrinho = {
+            titulo: item.title,
+            preco: item.price,
+            imageUrl: item.pictures[0].url,
+            quantidade: numero
+        }
+
+        console.log(carrinhoProdutos);
+        carrinhoProdutos.push(produtoCarrinho);
+        localStorage.setItem('carrinhoProdutos', JSON.stringify(carrinhoProdutos));
+
+        console.log(carrinhoProdutos);
+        atualizarCarrinho(carrinhoProdutos);
+        verificaQuantidade();
+    }
+}
+
+function atualizarCarrinho(items) {
+    const contCart = document.querySelector('.cart-items');
+    contCart.innerHTML = '';
+
+    if (!Array.isArray(items)) {
+        items = [];
+    }
+    
+    const cartQuantia = document.querySelector('.cart-quantia');
+    cartQuantia.textContent = '0';
+
+    let somaInteiros = 0;
+    let somaCentavos = 0;
+    
+    items.forEach(item => {
+        cartQuantia.textContent = Number(cartQuantia.textContent) + item.quantidade;
 
         const cartProduto = document.createElement('div');
         cartProduto.classList.add('cart-produto');
 
         const image = document.createElement('img');
-        image.setAttribute('src', item.pictures[0].url);
+        image.setAttribute('src', item.imageUrl);
         
         const cartTextos = document.createElement('div');
         cartTextos.classList.add('cart-textos');
 
         const titulo = document.createElement('h2');
-        titulo.textContent = item.title;
+        titulo.textContent = item.titulo;
 
         const preco = document.createElement('h1');
-        let valor = item.price * numero;
+        let valor = item.preco * item.quantidade;
     
         if(Number.isInteger(valor)){
             valor = Math.round(valor);
@@ -167,14 +207,20 @@ function adicionarCarrinho(item, quantidade) {
             let centavos = valor % 100;
             valor = `R$${inteiro}<sup>${centavos.toString().padStart(2, '0')}</sup>`;  
             preco.innerHTML = valor;
+
+            somaInteiros = somaInteiros + inteiro;
+            somaCentavos = somaCentavos + (centavos / 100);
         } else {
             let valor = item.price.toFixed(2);
             let inteiro = Math.floor(valor);
             let centavos = Math.round((valor - inteiro) * 100);
             valor = `R$${inteiro}<sup>${centavos.toString().padStart(2, '0')}</sup>`;  
             preco.innerHTML = valor;
-        }
 
+            somaInteiros = somaInteiros + inteiro;
+            somaCentavos = somaCentavos + (centavos / 100);
+        }
+        
         const cartQuantidade = document.createElement('div');
         cartQuantidade.classList.add('cart-quantidade');
 
@@ -182,10 +228,15 @@ function adicionarCarrinho(item, quantidade) {
         textoQuantidade.textContent = 'Quantidade: ';
         
         const quantidadeComprada = document.createElement('p');
-        quantidadeComprada.textContent = numero;
+        quantidadeComprada.textContent = item.quantidade;
 
         const botaoExcluir = document.createElement('div');
         botaoExcluir.setAttribute('id', 'excluir');
+
+        botaoExcluir.onclick = () => {
+            excluirProduto(item);
+            verificaQuantidade();
+        }
 
         const div1 = document.createElement('div');
         const div2 = document.createElement('div');
@@ -202,7 +253,36 @@ function adicionarCarrinho(item, quantidade) {
         cartProduto.appendChild(cartTextos);
         cartProduto.appendChild(botaoExcluir);
         contCart.appendChild(cartProduto);
+    })
 
-        localStorage.setItem('carrinhoProdutos', JSON.stringify(contCart));
-    }
+    let somaTotal = somaInteiros + somaCentavos;
+    let inteiro = Math.floor(somaTotal);
+    let centavos = Math.round((somaTotal - inteiro) * 100);
+    let valor = `R$ ${inteiro}<sup>${centavos.toString().padStart(2, '0')}</sup>`;  
+    
+    const cartTotal = document.createElement('div');
+    cartTotal.classList.add('cart-total');
+
+    const valorTotal = document.createElement('h1');
+    valorTotal.innerHTML = `Total: ${valor}`;
+
+    cartTotal.appendChild(valorTotal);
+    contCart.appendChild(cartTotal);
 }
+
+function excluirProduto(item) {
+    let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || '[]');
+
+    if (!Array.isArray(carrinhoProdutos)) {
+        carrinhoProdutos = [];
+    }
+
+    let index = carrinhoProdutos.findIndex(produto => produto.titulo === item.titulo);
+    
+    carrinhoProdutos.splice(index, 1);
+
+    localStorage.setItem('carrinhoProdutos', JSON.stringify(carrinhoProdutos));
+    atualizarCarrinho(carrinhoProdutos);
+}
+
+export { atualizarCarrinho };
