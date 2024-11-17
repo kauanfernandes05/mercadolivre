@@ -20,10 +20,13 @@
 
 .ofertas{
     border: 1px solid white;
-    width: 400px;
+    width: 100%;
     border-radius: 10px;
     padding: 20px 0;
 
+    display: flex;
+    flex-direction: column;
+    
     box-shadow:0 4px 10px rgba(0, 0, 0, 0.5);
     transition: 0.3s;
 
@@ -44,6 +47,13 @@
 }
 
 .img-oferta{
-    width: 100%;
+    width: 300px;
     height: 200px;
+    align-self: center;
+}
+
+@media(max-width: 1450px) {
+    .ofertas-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

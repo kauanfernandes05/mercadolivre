@@ -21,7 +21,7 @@ header{
 
 .pesquisa {
     position: relative;
-    align-self: flex-end;
+    align-self: center;
 }
 
 .conta-pesquisa {
@@ -136,8 +136,9 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 
-    padding: 30px 5% 0 30px;
+    padding: 0 50px;
 }
 
 .cont-cep{
@@ -278,7 +279,7 @@ header{
     position: absolute;
     display: none;
     top: 100%;
-    left: -1400%;
+    right: 0;
     height: 600px;
     width: 550px;
 
@@ -388,4 +389,33 @@ header{
 .cart-total h1{
     font-size: 32px;
     font-weight: 500;
+}
+
+@media(max-width: 1200px) {
+    .container-input {
+        align-items: center;
+    }
+
+    .logo {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .pesquisa {
+        width: 50%;
+    }
+    
+    .cont-cep {
+        display: none;
+    }
+
+    .cont-cards {
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .cont-cart {
+        margin: 0;
+    }
 }

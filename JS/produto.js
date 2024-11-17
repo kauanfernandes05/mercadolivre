@@ -3,14 +3,18 @@ import { verificaQuantidade } from "./carrinho.js";
 document.addEventListener('DOMContentLoaded', () => {
     const produtoSelecionado = JSON.parse(localStorage.getItem('produtoSelecionado'));
     if (produtoSelecionado) {
-        mostrarProduto(produtoSelecionado);
+        setTimeout(() => {
+            mostrarProduto(produtoSelecionado);;
+        }, 100)
     }
 
     let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || '[]');
     if (!Array.isArray(carrinhoProdutos)) {
         carrinhoProdutos = [];
     }
-    atualizarCarrinho(carrinhoProdutos);
+    setTimeout(() => {
+        atualizarCarrinho(carrinhoProdutos);
+    }, 100)
 });
 
 function mostrarProduto(item) {
@@ -144,7 +148,7 @@ function adicionarCarrinho(item, quantidade) {
     if(quantidade.textContent == 'quantidade') {
         alert('Escolha a quantidade');
     } else {
-        let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || []);
+        let carrinhoProdutos = JSON.parse(localStorage.getItem('carrinhoProdutos') || '[]');
 
         if (!Array.isArray(carrinhoProdutos)) {
             carrinhoProdutos = [];
@@ -211,7 +215,7 @@ function atualizarCarrinho(items) {
             somaInteiros = somaInteiros + inteiro;
             somaCentavos = somaCentavos + (centavos / 100);
         } else {
-            let valor = item.price.toFixed(2);
+            valor = valor.toFixed(2);
             let inteiro = Math.floor(valor);
             let centavos = Math.round((valor - inteiro) * 100);
             valor = `R$${inteiro}<sup>${centavos.toString().padStart(2, '0')}</sup>`;  
